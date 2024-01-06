@@ -77,7 +77,9 @@ class DBStorage:
 
     def get(self, cls, id):
         """Return name and its ID"""
-        objects = self.__session.query(classes[cls])
+        clss = cls
+        print(clss)
+        objects = self.__session.query(cls)
         for obj in objects:
             if obj.id == id:
                 return obj

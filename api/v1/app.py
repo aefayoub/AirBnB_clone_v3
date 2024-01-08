@@ -4,7 +4,7 @@ API
 """
 
 import os
-from flask import Flask
+from flask import Flask, jsonify
 from models import storage
 from api.v1.views import app_views
 
@@ -15,6 +15,12 @@ app.register_blueprint(app_views)
 def teardown(self):
     """teardown handling"""
     storage.close()
+
+@app.errorhandler(404)
+def page_not_found(error):
+    """handles page 404"""
+    status = {"error": "Not found"}
+    return jsonify(status), 404
 
 if __name__ == '__main__':
     try:
@@ -27,4 +33,4 @@ if __name__ == '__main__':
     except:
         port = '5000'
 
-    app.run(host=host, port=port, threaded=True)
+    app.run(host=host, port=port)

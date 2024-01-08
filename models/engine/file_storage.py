@@ -87,7 +87,7 @@ class FileStorage:
             dict_obj = FileStorage.__objects.values()
             for key, value in self.__objects.items():
                 if cls == value.__class__ or cls == value.__class__.__name__:
-                    list_obj.append(value)                
+                    list_obj.append(value)
             return len(list_obj)
         else:
             list_obj = []

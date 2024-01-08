@@ -104,5 +104,5 @@ class DBStorage:
             return nobjects
         else:
             for clss in classes:
-                    nobjects += len(self.__session.query(classes[clss]).all())
+                nobjects += len(self.__session.query(classes[clss]).all())
             return nobjects

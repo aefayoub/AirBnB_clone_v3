@@ -82,9 +82,15 @@ class FileStorage:
 
     def count(self, cls=None):
         """Return number of objects in storage"""
-        obj_list = []
-        obj_dict = FileStorage.__objects.values()
-        for item in obj_dict:
-            if type(item).__name__ == cls:
-                obj_list.append(item)
-        return len(obj_list)
+        if cls:
+            list_obj = []
+            dict_obj = FileStorage.__objects.values()
+            for key, value in self.__objects.items():
+                if cls == value.__class__ or cls == value.__class__.__name__:
+                    list_obj.append(value)                
+            return len(list_obj)
+        else:
+            list_obj = []
+            for item in classes:
+                list_obj.append(item)
+            return len(list_obj)

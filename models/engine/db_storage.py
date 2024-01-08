@@ -98,6 +98,6 @@ class DBStorage:
         """Return number of objects in storage"""
         nobjects = 0
         for clss in classes:
-            if cls is None or cls is classes[clss] or cls is clss:
+            if cls is classes[clss] or cls is clss:
                 nobjects += len(self.__session.query(classes[clss]).all())
         return nobjects

@@ -67,51 +67,6 @@ test_db_storage.py'])
             self.assertTrue(len(func[1].__doc__) >= 1,
                             "{:s} method needs a docstring".format(func[0]))
 
-    def test_get_method_returns_correct_object(self):
-        # Define a test object and add it to the database
-        test_object = YourObjectClass()  # Replace with the actual name of your object class
-        test_object.id = 1
-        self.db_storage.add(test_object)  # Assuming there's an 'add' method to add objects to the storage
-
-        # Call the get method with the test object's class and id
-        result = self.db_storage.get(type(test_object).__name__, 1)
-
-        # Assert that the returned object is the same as the added object
-        self.assertEqual(result, test_object)
-
-    def test_get_method_returns_none_for_nonexistent_object(self):
-        # Call the get method with a non-existent class and id
-        result = self.db_storage.get("NonExistentClass", 1)
-
-        # Assert that the result is None
-        self.assertIsNone(result)
-
-    def test_count_method_returns_correct_number_of_objects(self):
-        # Define test objects and add them to the database
-        test_objects = [YourObjectClass() for _ in range(3)]  # Replace with the actual name of your object class
-        for i, obj in enumerate(test_objects, start=1):
-            obj.id = i
-            self.db_storage.add(obj)  # Assuming there's an 'add' method to add objects to the storage
-
-        # Call the count method without specifying a class
-        result = self.db_storage.count()
-
-        # Assert that the result is equal to the total number of test objects
-        self.assertEqual(result, len(test_objects))
-
-    def test_count_method_returns_correct_number_of_objects_for_specific_class(self):
-        # Define test objects for a specific class and add them to the database
-        test_objects = [YourObjectClass() for _ in range(2)]  # Replace with the actual name of your object class
-        for i, obj in enumerate(test_objects, start=1):
-            obj.id = i
-            self.db_storage.add(obj)  # Assuming there's an 'add' method to add objects to the storage
-
-        # Call the count method for the specific class
-        result = self.db_storage.count(cls=type(test_objects[0]))
-
-        # Assert that the result is equal to the number of test objects for that class
-        self.assertEqual(result, len(test_objects))
-
 class TestFileStorage(unittest.TestCase):
     """Test the FileStorage class"""
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")

@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-Index of app views
-"""
+"""Index of app views."""
 from flask import jsonify
 from models import storage
 from api.v1.views import app_views
@@ -10,7 +8,7 @@ from api.v1.views import app_views
 # Function: status
 @app_views.route('/status')
 def status():
-    """ route status"""
+    """Route status."""
     status = {"status": "OK"}
     return jsonify(status)
 
@@ -18,7 +16,7 @@ def status():
 # Function: status
 @app_views.route('/stats')
 def count():
-    """ returns count of objects"""
+    """Return count of object."""
     total = {}
     classes = {"Amenity": "amenities",
                "City": "cities",

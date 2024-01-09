@@ -1,8 +1,5 @@
 #!/usr/bin/python3
-"""
-State view that contains all methods
-"""
-
+"""State view that contains all methods."""
 from flask import abort, jsonify
 from models import storage
 from api.v1.views import app_views
@@ -10,7 +7,7 @@ from api.v1.views import app_views
 
 @app_views.route('/states', methods=['GET'], strict_slashes=False)
 def states_all():
-    """return all states"""
+    """Return all states."""
     states = []
     states = storage.all("State").values()
     for state in states:
@@ -20,7 +17,7 @@ def states_all():
 
 @app_views.route('/states/<state_id>', methods=['GET'])
 def states_get(state_id):
-    """return all state by id"""
+    """Return all state by id."""
     state = storage.get("State", state_id)
     if state is None:
         abort(404)
@@ -30,7 +27,7 @@ def states_get(state_id):
 
 @app_views.route('/states/<state_id>', methods=['DELETE'])
 def states_delete(state_id):
-    """delete state by id"""
+    """Delete state by id."""
     empty_dict = {}
     state = storage.get("State", state_id)
     if state is None:

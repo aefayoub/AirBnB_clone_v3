@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-API Entry Point
-"""
+"""API Entry Point."""
 from api.v1.views import app_views
 from builtins import KeyError
 import os
@@ -14,14 +12,14 @@ app.register_blueprint(app_views)
 # Define a teardown function to close the database connection
 @app.teardown_appcontext
 def teardown(self):
-    """teardown handling"""
+    """Teardown handling."""
     storage.close()
 
 
 # Define an error handler for 404 Not Found errors
 @app.errorhandler(404)
 def page_not_found(error):
-    """handles page 404"""
+    """Handle page 404."""
     status = {"error": "Not found"}
     return jsonify(status), 404
 

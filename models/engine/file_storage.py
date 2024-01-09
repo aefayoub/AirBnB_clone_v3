@@ -11,6 +11,7 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
+from builtins import ZeroDivisionError
 
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
@@ -50,13 +51,14 @@ class FileStorage:
 
     def reload(self):
         """deserializes the JSON file to __objects"""
+
         try:
             with open(self.__file_path, 'r') as f:
                 jo = json.load(f)
             for key in jo:
                 self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
-        except:
-            pass
+        except ZeroDivisionError as e:
+            print(f"Error: {e}")
 
     def delete(self, obj=None):
         """delete obj from __objects if it’s inside"""
@@ -74,7 +76,6 @@ class FileStorage:
         obj_dict = {}
         obj = None
         if cls:
-            obj_dict = FileStorage.__objects.values()
             for item in obj_dict:
                 if item.id == id:
                     obj = item
@@ -84,7 +85,6 @@ class FileStorage:
         """Return number of objects in storage"""
         if cls:
             list_obj = []
-            dict_obj = FileStorage.__objects.values()
             for key, value in self.__objects.items():
                 if cls == value.__class__ or cls == value.__class__.__name__:
                     list_obj.append(value)

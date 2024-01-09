@@ -19,7 +19,7 @@ classes = {"Amenity": Amenity, "City": City,
 
 
 class DBStorage:
-     """
+    """
     Interacts with the MySQL database.
 
     Attributes:
@@ -45,7 +45,7 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-         """
+        """
         Query on the current database session.
 
         Args:

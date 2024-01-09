@@ -11,6 +11,7 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
+from builtins import KeyError
 
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
@@ -50,12 +51,13 @@ class FileStorage:
 
     def reload(self):
         """deserializes the JSON file to __objects"""
+
         try:
             with open(self.__file_path, 'r') as f:
                 jo = json.load(f)
             for key in jo:
                 self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
-        except ex:
+        except KeyError:
             pass
 
     def delete(self, obj=None):
@@ -73,8 +75,13 @@ class FileStorage:
         """Return name and its ID"""
         obj_dict = {}
         obj = None
+<<<<<<< HEAD
         if cls:
             obj_dict = FileStorage.__objects.values()
+=======
+        obj_dict = FileStorage.__objects.values()
+        if cls:
+>>>>>>> 38d35125b9b84823537bf901d6827f53e1d0749f
             for item in obj_dict:
                 if item.id == id:
                     obj = item
@@ -84,7 +91,10 @@ class FileStorage:
         """Return number of objects in storage"""
         if cls:
             list_obj = []
+<<<<<<< HEAD
             dict_obj = FileStorage.__objects.values()
+=======
+>>>>>>> 38d35125b9b84823537bf901d6827f53e1d0749f
             for key, value in self.__objects.items():
                 if cls == value.__class__ or cls == value.__class__.__name__:
                     list_obj.append(value)

@@ -1,8 +1,6 @@
 #!/usr/bin/python3
-"""
-Contains the class DBStorage
-"""
-
+"""Contains the class DBStorage."""
+import models
 from models.amenity import Amenity
 from models.base_model import Base
 from models.city import City
@@ -26,11 +24,12 @@ class DBStorage:
         __engine (sqlalchemy.engine.Engine): The database engine.
         __session (sqlalchemy.orm.Session): The database session.
     """
+
     __engine = None
     __session = None
 
     def __init__(self):
-        """Instantiate a DBStorage object"""
+        """Instantiate a DBStorage object."""
         HBNB_MYSQL_USER = getenv('HBNB_MYSQL_USER')
         HBNB_MYSQL_PWD = getenv('HBNB_MYSQL_PWD')
         HBNB_MYSQL_HOST = getenv('HBNB_MYSQL_HOST')
@@ -73,9 +72,7 @@ class DBStorage:
         self.__session.add(obj)
 
     def save(self):
-        """
-        Commit all changes of the current database session.
-        """
+        """Commit all changes of the current database session."""
         self.__session.commit()
 
     def delete(self, obj=None):
@@ -89,14 +86,14 @@ class DBStorage:
             self.__session.delete(obj)
 
     def reload(self):
-        """reloads data from the database"""
+        """Reload  data from the database."""
         Base.metadata.create_all(self.__engine)
         sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess_factory)
         self.__session = Session
 
     def close(self):
-        """call remove() method on the private session attribute"""
+        """Call remove() method on the private session attribute."""
         self.__session.remove()
 
     def get(self, cls, id):

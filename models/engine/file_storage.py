@@ -1,8 +1,5 @@
 #!/usr/bin/python3
-"""
-Contains the FileStorage class
-"""
-
+"""Contains the FileStorage class."""
 import json
 from models.amenity import Amenity
 from models.base_model import BaseModel
@@ -19,7 +16,7 @@ classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
 
 class FileStorage:
     """
-    Serializes instances to a JSON file and deserializes back to instances.
+    Serialize instances to a JSON file and deserializes back to instances.
 
     Attributes:
         __file_path (str): Path to the JSON file.
@@ -33,7 +30,7 @@ class FileStorage:
 
     def all(self, cls=None):
         """
-        Returns the dictionary __objects.
+        Return the dictionary __objects.
 
         Args:
             cls (class): The class to filter the dictionary.
@@ -51,7 +48,7 @@ class FileStorage:
 
     def new(self, obj):
         """
-        Sets in __objects the obj with key <obj class name>.id.
+        Set in __objects the obj with key <obj class name>.id.
 
         Args:
             obj (Base): The object to add to __objects.
@@ -61,7 +58,7 @@ class FileStorage:
             self.__objects[key] = obj
 
     def save(self):
-        """serializes __objects to the JSON file (path: __file_path)"""
+        """Serialize __objects to the JSON file (path: __file_path)."""
         json_objects = {}
         for key in self.__objects:
             json_objects[key] = self.__objects[key].to_dict()
@@ -69,8 +66,7 @@ class FileStorage:
             json.dump(json_objects, f)
 
     def reload(self):
-        """deserializes the JSON file to __objects"""
-
+        """Deserializes the JSON file to __objects."""
         try:
             with open(self.__file_path, 'r') as f:
                 jo = json.load(f)
@@ -92,7 +88,7 @@ class FileStorage:
                 del self.__objects[key]
 
     def close(self):
-        """call reload() method for deserializing the JSON file to objects"""
+        """Call reload() method for deserializing the JSON file to objects."""
         self.reload()
 
     def get(self, cls, id):

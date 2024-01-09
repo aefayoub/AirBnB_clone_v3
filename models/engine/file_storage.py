@@ -18,7 +18,13 @@ classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
 
 
 class FileStorage:
-    """serializes instances to a JSON file & deserializes back to instances"""
+    """
+    Serializes instances to a JSON file and deserializes back to instances.
+
+    Attributes:
+        __file_path (str): Path to the JSON file.
+        __objects (dict): Dictionary to store all objects by <class name>.id.
+    """
 
     # string - path to the JSON file
     __file_path = "file.json"
@@ -26,7 +32,15 @@ class FileStorage:
     __objects = {}
 
     def all(self, cls=None):
-        """returns the dictionary __objects"""
+        """
+        Returns the dictionary __objects.
+
+        Args:
+            cls (class): The class to filter the dictionary.
+
+        Returns:
+            dict: A dictionary containing all objects of the specified class.
+        """
         if cls is not None:
             new_dict = {}
             for key, value in self.__objects.items():
@@ -36,7 +50,12 @@ class FileStorage:
         return self.__objects
 
     def new(self, obj):
-        """sets in __objects the obj with key <obj class name>.id"""
+        """
+        Sets in __objects the obj with key <obj class name>.id.
+
+        Args:
+            obj (Base): The object to add to __objects.
+        """
         if obj is not None:
             key = obj.__class__.__name__ + "." + obj.id
             self.__objects[key] = obj
@@ -61,7 +80,12 @@ class FileStorage:
             pass
 
     def delete(self, obj=None):
-        """delete obj from __objects if it’s inside"""
+        """
+        Delete obj from __objects if it’s inside.
+
+        Args:
+            obj (Base): The object to delete from __objects.
+        """
         if obj is not None:
             key = obj.__class__.__name__ + '.' + obj.id
             if key in self.__objects:
@@ -72,7 +96,16 @@ class FileStorage:
         self.reload()
 
     def get(self, cls, id):
-        """Return name and its ID"""
+        """
+        Return object by class name and its ID.
+
+        Args:
+            cls (class): The class to retrieve the object from.
+            id (str): The ID of the object to retrieve.
+
+        Returns:
+            Base: The object with the specified ID in the specified class.
+        """
         obj_dict = {}
         obj = None
         obj_dict = FileStorage.__objects.values()
@@ -83,7 +116,15 @@ class FileStorage:
             return obj
 
     def count(self, cls=None):
-        """Return number of objects in storage"""
+        """
+        Return the number of objects in storage.
+
+        Args:
+            cls (class): The class to count objects for.
+
+        Returns:
+            int: The number of objects in the specified class.
+        """
         if cls:
             list_obj = []
             for key, value in self.__objects.items():

@@ -11,7 +11,7 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
-from builtins import ZeroDivisionError
+from builtins import KeyError
 
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
@@ -57,8 +57,8 @@ class FileStorage:
                 jo = json.load(f)
             for key in jo:
                 self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
-        except ZeroDivisionError as e:
-            print(f"Error: {e}")
+        except KeyError:
+            pass
 
     def delete(self, obj=None):
         """delete obj from __objects if it’s inside"""
@@ -75,6 +75,7 @@ class FileStorage:
         """Return name and its ID"""
         obj_dict = {}
         obj = None
+        obj_dict = FileStorage.__objects.values()
         if cls:
             for item in obj_dict:
                 if item.id == id:

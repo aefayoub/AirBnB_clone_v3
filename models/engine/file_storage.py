@@ -86,7 +86,6 @@ class FileStorage:
         """Return number of objects in storage"""
         if cls:
             list_obj = []
-            dict_obj = FileStorage.__objects.values()
             for key, value in self.__objects.items():
                 if cls == value.__class__ or cls == value.__class__.__name__:
                     list_obj.append(value)

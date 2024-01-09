@@ -75,13 +75,8 @@ class FileStorage:
         """Return name and its ID"""
         obj_dict = {}
         obj = None
-<<<<<<< HEAD
-        if cls:
-            obj_dict = FileStorage.__objects.values()
-=======
         obj_dict = FileStorage.__objects.values()
         if cls:
->>>>>>> 38d35125b9b84823537bf901d6827f53e1d0749f
             for item in obj_dict:
                 if item.id == id:
                     obj = item
@@ -91,10 +86,7 @@ class FileStorage:
         """Return number of objects in storage"""
         if cls:
             list_obj = []
-<<<<<<< HEAD
             dict_obj = FileStorage.__objects.values()
-=======
->>>>>>> 38d35125b9b84823537bf901d6827f53e1d0749f
             for key, value in self.__objects.items():
                 if cls == value.__class__ or cls == value.__class__.__name__:
                     list_obj.append(value)

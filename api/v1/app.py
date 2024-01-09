@@ -9,22 +9,25 @@ app = Flask(__name__)
 app.register_blueprint(app_views)
 
 
-# Define a teardown function to close the database connection
 @app.teardown_appcontext
 def teardown(self):
-    """Teardown handling."""
+    """Teardown handling.
+
+    Closes the database connection when the application context is torn down.
+    """
     storage.close()
 
 
-# Define an error handler for 404 Not Found errors
 @app.errorhandler(404)
 def page_not_found(error):
-    """Handle page 404."""
+    """Handle page 404.
+
+    Returns a JSON response with a 404 error message.
+    """
     status = {"error": "Not found"}
     return jsonify(status), 404
 
 
-# Entry point to run the application
 if __name__ == '__main__':
     # Retrieve the host and port from environment variables.
     try:

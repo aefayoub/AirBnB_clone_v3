@@ -3,16 +3,14 @@
 Contains the class DBStorage
 """
 
-import models
 from models.amenity import Amenity
-from models.base_model import BaseModel, Base
+from models.base_model import Base
 from models.city import City
 from models.place import Place
 from models.review import Review
 from models.state import State
 from models.user import User
 from os import getenv
-import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
@@ -76,7 +74,7 @@ class DBStorage:
         self.__session.remove()
 
     def get(self, cls, id):
-        new_dict = {}
+        """Method retrieve first record in class by id"""
         for clss in classes:
             if cls is None or cls is classes[clss] or cls is clss:
                 objs = self.__session.query(classes[clss])
@@ -92,4 +90,8 @@ class DBStorage:
             for clss in classes:
                 if cls is classes[clss] or cls is clss:
                     nobjects += len(self.__session.query(classes[clss]).all())
+            return nobjects
+        else:
+            for clss in classes:
+                nobjects += len(self.__session.query(classes[clss]).all())
             return nobjects

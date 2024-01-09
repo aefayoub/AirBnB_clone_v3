@@ -6,14 +6,14 @@ from flask import jsonify
 from models import storage
 from api.v1.views import app_views
 
-
+# Function: status
 @app_views.route('/status')
 def status():
     """ route status"""
     status = {"status": "OK"}
     return jsonify(status)
 
-
+# Function: status
 @app_views.route('/stats')
 def count():
     """ returns count of objects"""

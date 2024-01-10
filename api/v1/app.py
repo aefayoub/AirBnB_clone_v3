@@ -1,10 +1,10 @@
 #!/usr/bin/python3
-"""API Entry Point."""
+"""The API entry point to run the app."""
 from builtins import KeyError
 from flask import Flask, jsonify
 from models import storage
 import os
-from v1.views import app_views
+from app.v1.views import app_views
 app = Flask(__name__)
 app.register_blueprint(app_views)
 

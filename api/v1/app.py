@@ -4,26 +4,22 @@ from builtins import KeyError
 from flask import Flask, jsonify
 from models import storage
 import os
-from app.v1.views import app_views
+from api.v1.views import app_views
 app = Flask(__name__)
 app.register_blueprint(app_views)
 
 
+# Closes the database connection when the application
 @app.teardown_appcontext
 def teardown(self):
-    """Teardown handling.
-
-    Closes the database connection when the application context is torn down.
-    """
+    """Found database connection when the application."""
     storage.close()
 
 
+# Returns a JSON response with a 404 error message
 @app.errorhandler(404)
 def page_not_found(error):
-    """Handle page 404.
-
-    Returns a JSON response with a 404 error message.
-    """
+    """Return a JSON response with a 404."""
     status = {"error": "Not found"}
     return jsonify(status), 404
 
